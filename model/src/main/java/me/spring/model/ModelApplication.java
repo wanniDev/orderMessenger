@@ -1,13 +1,13 @@
-package me.spring.ordermessenger;
+package me.spring.model;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OrderMessengerApplication {
+public class ModelApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderMessengerApplication.class, args);
+		SpringApplication.run(ModelApplication.class, args);
 	}
 
 }
