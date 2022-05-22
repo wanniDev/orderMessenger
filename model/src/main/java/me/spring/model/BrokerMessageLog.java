@@ -28,4 +28,14 @@ public class BrokerMessageLog {
 	private LocalDateTime nextRetry;
 	private LocalDateTime createTime;
 	private LocalDateTime updateTime;
+
+	public void updateBrokerMessageLogStatus(String status, LocalDateTime updateTime) {
+		this.status = status;
+		this.updateTime = updateTime;
+	}
+
+	public void updateResend(LocalDateTime updateTime) {
+		this.updateTime = updateTime;
+		this.tryCount++;
+	}
 }

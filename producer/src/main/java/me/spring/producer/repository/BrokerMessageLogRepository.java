@@ -18,4 +18,6 @@ public interface BrokerMessageLogRepository extends JpaRepository<BrokerMessageL
 		+ "where bml.messageId = :messageId"
 	)
 	void updateBrokerMessageLogStatus(String status, LocalDateTime updateTime, String messageId);
+
+	List<BrokerMessageLog> findBrokerMessageLogsByStatusAndNextRetryLessThanEqual(String status, LocalDateTime nextRetry);
 }
