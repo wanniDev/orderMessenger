@@ -13,9 +13,9 @@
     </parent>
     <dependencies>
         <dependency>
-            <groupId>me.spring</groupId>
-            <artifactId>producer</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>
