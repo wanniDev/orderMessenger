@@ -3,6 +3,7 @@ package me.spring.producer.sender;
 import static me.spring.producer.constant.OrderMessageStatus.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.spring.model.BrokerMessageLog;
 import me.spring.model.Order;
 import me.spring.producer.repository.BrokerMessageLogRepository;
 
@@ -38,7 +40,11 @@ public class RabbitOrderSender implements AMQPOrderSender {
 			log.error("correlationData: {}", correlationData);
 			String messageId = correlationData.getId();
 			if(ack) {
-				brokerMessageLogRepository.updateBrokerMessageLogStatus(SUCCESS.getValue(), LocalDateTime.now(), messageId);
+				Optional<BrokerMessageLog> brokerMessageLog = brokerMessageLogRepository.findBrokerMessageLogByMessageId(
+					messageId);
+				brokerMessageLog.ifPresent(bml -> {
+					bml.updateBrokerMessageLogStatus(SUCCESS.getValue(), LocalDateTime.now());
+				});
 			} else {
 				log.error("error while processing message! {}", cause);
 			}
