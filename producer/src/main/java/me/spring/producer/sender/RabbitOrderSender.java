@@ -26,12 +26,6 @@ public class RabbitOrderSender implements Sender<Order> {
 
 	@Override
 	public void send(Order order) {
-
-	}
-
-
-	// 메시지 전송 메서드: 사용자 지정 개체 메시지 빌드
-	public void sendOrder(Order order) throws Exception {
 		// ConfirmCallback 인터페이스를 구현하면 메시지가 브로커에게 전송된 후 메시지가
 		// 브로커 서버에 도달했는지 확인하기 위해 콜백이 트리거됩니다. 즉, Exchange에 올바르게 도달했는지 여부만 확인됩니다.
 		rabbitTemplate.setConfirmCallback(confirmCallback);
