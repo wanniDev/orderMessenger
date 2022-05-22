@@ -16,7 +16,7 @@ import me.spring.producer.repository.BrokerMessageLogRepository;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class RabbitOrderSender implements AMQPSender<Order> {
+public class RabbitOrderSender implements AMQPOrderSender {
 
 	private final RabbitTemplate rabbitTemplate;
 
