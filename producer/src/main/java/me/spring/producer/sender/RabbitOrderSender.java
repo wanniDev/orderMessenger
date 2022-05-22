@@ -10,15 +10,13 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.spring.model.BrokerMessageLog;
 import me.spring.model.Order;
-import me.spring.producer.constant.OrderMessageStatus;
 import me.spring.producer.repository.BrokerMessageLogRepository;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class RabbitOrderSender implements Sender<Order> {
+public class RabbitOrderSender implements AMQPSender<Order> {
 
 	private final RabbitTemplate rabbitTemplate;
 
@@ -27,7 +25,7 @@ public class RabbitOrderSender implements Sender<Order> {
 	@Override
 	public void send(Order order) {
 		// ConfirmCallback 인터페이스를 구현하면 메시지가 브로커에게 전송된 후 메시지가
-		// 브로커 서버에 도달했는지 확인하기 위해 콜백이 트리거됩니다. 즉, Exchange에 올바르게 도달했는지 여부만 확인됩니다.
+		// 브로커 서버에 도달했는지 확인하기 위해 콜백이 트리거됩니다. 즉, Exchange 에 올바르게 도달했는지 여부만 확인됩니다.
 		rabbitTemplate.setConfirmCallback(confirmCallback);
 		// 메세지 고유의 ID
 		CorrelationData correlationData = new CorrelationData(order.getMessageId());
