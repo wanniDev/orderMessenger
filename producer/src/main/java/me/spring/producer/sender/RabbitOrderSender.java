@@ -45,7 +45,7 @@ public class RabbitOrderSender implements Sender<Order> {
 		public void confirm(CorrelationData correlationData, boolean ack, String cause) {
 			log.error("correlationData: {}", correlationData);
 			String messageId = correlationData.getId();
-			if(ack){
+			if(ack) {
 				brokerMessageLogRepository.updateBrokerMessageLogStatus(SUCCESS.getValue(), LocalDateTime.now(), messageId);
 			} else {
 				log.error("error while processing message! {}", cause);
